@@ -103,6 +103,7 @@ export default {
       const path = this.path
       document.cookie = `hexToken=${token}; expires=${new Date(expired)}`
       document.cookie = `apiPath=${path}; expires=${new Date(expired)}`
+      console.log(data.token)
     }
   }
 }

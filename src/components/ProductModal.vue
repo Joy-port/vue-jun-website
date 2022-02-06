@@ -12,7 +12,7 @@
           <button
             type="button"
             class="btn-close"
-            @click.prevent="$emit('toggleModal')"
+            @click.prevent="$emit('toggle-modal', 'product')"
           ></button>
         </div>
         <div class="modal-body text-break overflow-y-auto">
@@ -77,7 +77,7 @@
           >
             編輯
           </button>
-          <button type="button" class="btn btn-outline-danger">刪除</button>
+          <button type="button" class="btn btn-outline-danger" @click.prevent="deleteProduct(product.id)" >刪除</button>
         </div>
       </div>
     </div>
@@ -88,25 +88,26 @@
 export default {
   name: 'Modal',
   props: ['temp'],
+  emits: ['toggle-modal'],
   data () {
     return {
       product: this.temp
     }
   },
   methods: {
-    closeModal () {
-      this.$emit('toggleModal')
+    deleteProduct (id) {
+      this.$emit('deleteProduct', id)
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 //modal
 .backdrop {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
   right: 0;
@@ -118,7 +119,9 @@ export default {
   margin: 5% auto;
   max-height: 90%;
 }
-
+.modal-content {
+  border: 0px solid #000;
+}
 .img {
   width: 100%;
   object-fit: cover;
