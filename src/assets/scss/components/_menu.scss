@@ -1,0 +1,34 @@
+.menu {
+    &-list {
+        background-color: $success;
+        & >li > a {
+            display: block;
+            padding: .5rem 2rem;
+            color: $white;
+            &:hover {
+                background-color: $teal;
+            }
+        }
+        & > li + ul {
+            border-top: $teal solid 2px;
+            border-top: $teal solid 2px;
+        }
+    }
+
+    &-child-list {
+        & >li > a {
+            display: block;
+            padding: .5rem 2rem;
+            color: $dark-green;
+            background-color: $cyan;
+            &:hover {
+                color: $white;
+                background-color: $success;
+            }
+        }
+        & > li + li {
+            border-top: $success solid 1px;
+        }
+
+    }
+}

@@ -1,22 +1,27 @@
 <template>
   <div class="">
-    <nav>
-      <div class="d-flex bg-primary">
-        <a href="" class="text-white">
-          <span class="material-icons"> widgets </span>
-          後台管理</a
-        >
-      </div>
-      <div class="d-flex">
-        <a href="#" class="d-flex">
-          <span class="material-icons"> home </span>
-          前往前台</a
-        >
-        <a href="#" class="d-flex">登出</a>
+    <nav class="px-3">
+      <div class="d-flex justify-content-between bg-success py-5">
+        <div class="d-flex">
+          <a href="#" class="d-flex text-white">
+            <span class="material-icons me-3"> widgets </span>
+            後台管理</a
+          >
+        </div>
+        <div class="d-flex gap-4">
+          <a href="#" class="d-flex text-white">
+            <span class="material-icons me-3"> home </span>
+            前往前台</a
+          >
+          <a href="#" class="d-flex text-white">
+            <span class="material-icons me-3"> logout </span>
+            登出</a
+          >
+        </div>
       </div>
     </nav>
-    <div class="d-flex">
-      <ul class="menu-list">
+    <div class="d-flex vh-100">
+      <ul class="menu-list border-top border-2 border-teal">
         <li class=""><a href="#" class="menu-link">產品</a></li>
         <ul class="menu-child-list">
           <li class=""><router-link to="/dashboard">產品列表</router-link></li>
