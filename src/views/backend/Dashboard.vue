@@ -1,23 +1,21 @@
 <template>
   <div class="">
-    <nav class="px-3">
-      <div class="d-flex justify-content-between bg-success py-5">
-        <div class="d-flex">
-          <a href="#" class="d-flex text-white">
-            <span class="material-icons me-3"> widgets </span>
-            後台管理</a
-          >
-        </div>
-        <div class="d-flex gap-4">
-          <a href="#" class="d-flex text-white">
-            <span class="material-icons me-3"> home </span>
-            前往前台</a
-          >
-          <a href="#" class="d-flex text-white">
-            <span class="material-icons me-3"> logout </span>
-            登出</a
-          >
-        </div>
+    <nav class="d-flex justify-content-between bg-success px-10 py-5">
+      <div class="d-flex">
+        <a href="#" class="d-flex text-white">
+          <span class="material-icons me-3"> widgets </span>
+          後台管理</a
+        >
+      </div>
+      <div class="d-flex gap-4">
+        <a href="#" class="d-flex text-white">
+          <span class="material-icons me-3"> home </span>
+          前往前台</a
+        >
+        <a href="#" class="d-flex text-white">
+          <span class="material-icons me-3"> logout </span>
+          登出</a
+        >
       </div>
     </nav>
     <div class="d-flex vh-100">
