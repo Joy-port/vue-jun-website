@@ -1,0 +1,29 @@
+.content- {
+  &card {
+    border-radius: 12px;
+    border: 0px solid transparent;
+    box-shadow: 0 1px 8px 1px rgba(215, 215, 215, 0.5);
+  }
+  &card-img-top {
+    height: 140px;
+    width: 100%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    object-fit: cover;
+    object-position: center;
+  }
+  &card-img-top-sm {
+    height: 110px;
+  }
+}
+
+.card-inside-img {
+  width: 100%;
+
+  object-fit: cover;
+  object-position: center center;
+}
+
+.card-fit-img {
+  object-fit: contain;
+}

@@ -1,0 +1,46 @@
+body {
+  transition: all 0.5s ease-in;
+}
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.h7,
+.h8 {
+  margin-bottom: 0;
+}
+
+a {
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+i {
+  vertical-align: middle;
+}
+
+input:focus,
+input:active {
+  outline: none;
+}

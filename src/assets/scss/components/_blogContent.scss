@@ -1,0 +1,323 @@
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: $black;
+  letter-spacing: 1.5px;
+}
+
+.subtitle {
+  font-weight: 300;
+}
+
+.date {
+  font-weight: 300;
+}
+
+.text-content {
+  line-height: 1.8;
+  font-family: "TaipeiSansTCBeta", "Josefin Sans", "Nunito", sans-serif;
+  font-size: 1.125rem;
+  letter-spacing: 1.5px;
+  color: $gray-800;
+  font-weight: 300;
+  margin-bottom: 3rem;
+
+  & > p {
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    &::selection {
+      background-color: $warning;
+    }
+    &.text-paragraph {
+      margin-bottom: 0;
+    }
+    &.text-btn-group {
+      & > a + a {
+        margin-top: 0.5rem;
+        display: table;
+      }
+    }
+  }
+  & > img {
+    display: block;
+  }
+  &.img-fluid {
+    border-radius: 12px;
+  }
+
+  & > .number-list {
+    counter-reset: num;
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+
+    & > li {
+      display: block;
+      &::before {
+        counter-increment: num;
+        content: counter(num) ". ";
+      }
+      &::selection {
+        background-color: $warning;
+      }
+    }
+    & > li + li {
+      margin-top: 0.5rem;
+    }
+  }
+
+  & > .bulleted-list {
+    margin-bottom: 2rem;
+
+    & > li {
+      list-style-type: disc;
+      margin-left: 2rem;
+      &::selection {
+        background-color: $warning;
+      }
+    }
+    & > li + li {
+      margin-top: 0.5rem;
+    }
+    & > ul {
+      margin-bottom: 2rem;
+      & > li {
+        list-style-type: circle;
+        margin-left: 4rem;
+        &::selection {
+          background-color: $warning;
+        }
+      }
+      & > li + li {
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+  & > .circle-list {
+    margin-bottom: 2rem;
+    list-style: circle;
+    & > li {
+      list-style-type: circle;
+      margin-left: 4rem;
+      &::selection {
+        background-color: $warning;
+      }
+    }
+    & > li + li {
+      margin-top: 0.5rem;
+    }
+  }
+  &-link {
+    line-height: 1.5;
+    text-decoration: underline;
+    color: $info;
+  }
+
+  &-link-btn {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid $black;
+    color: $black;
+    display: inline-flex;
+    transition: all 0.3s ease-in;
+
+    &-dark {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      display: inline-flex;
+      border: 1px solid transparent;
+      color: $white;
+      background-color: #32373c;
+      transition: all 0.3s ease-in;
+
+      &:hover {
+        color: #32373c;
+        border: 1px solid #32373c;
+        background-color: #fff;
+      }
+    }
+    &:hover {
+      color: $info;
+      border: 1px solid $info;
+    }
+  }
+  &-primary {
+    color: $primary;
+    font-weight: 500;
+  }
+  &-success {
+    color: $success;
+    font-weight: 500;
+  }
+  &-link-lg {
+    display: block;
+    color: $info;
+    font-size: 1.75rem;
+    transition: all 0.25s;
+
+    &:hover {
+      color: $black;
+    }
+  }
+  &-callout {
+    padding: 0.875rem;
+    line-height: 1.5;
+  }
+
+  &-highlight {
+    background-color: $warning;
+    border-bottom: 2px solid #f8cd5f;
+  }
+  &-hover-highlight {
+    &:hover {
+      background-color: $warning;
+    }
+  }
+  &-h1 {
+    background: $light;
+    color: $black;
+    padding: 4px;
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  &-h2 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: $info;
+    margin-bottom: 1.25rem;
+  }
+  &-h3 {
+    font-size: 1.25rem;
+    color: $info;
+    margin-bottom: 1.25rem;
+  }
+
+  &-quote {
+    color: $primary;
+    border-left: 5px solid $primary;
+    padding-left: 2rem;
+    font-style: italic;
+    margin-bottom: 3rem;
+    & > p {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 0.625rem;
+    }
+
+    & > p:last-child {
+      font-size: 1rem;
+      font-weight: normal;
+      text-align: right;
+      margin-bottom: 0;
+    }
+  }
+}
+.img-fluid {
+  margin-bottom: 1rem;
+}
+
+.table-content {
+  margin-bottom: 0.5rem;
+
+  & > a {
+    color: $secondary;
+    font-weight: 400;
+    display: block;
+  }
+  &:hover {
+    & > a {
+      color: $black;
+      font-weight: 400;
+    }
+  }
+
+  &.active {
+    a {
+      color: $info;
+      font-weight: 400;
+    }
+  }
+
+  &-h1 {
+    padding-left: 0;
+  }
+  &-h2 {
+    padding-left: 1rem;
+  }
+  &-h3 {
+    padding-left: 2rem;
+  }
+  &-h4 {
+    padding-left: 3.5rem;
+  }
+}
+
+.text-footer {
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  margin-bottom: 2.25rem;
+  &-tags {
+    margin-left: 1rem;
+    display: flex;
+    & > li + li {
+      margin-left: 0.5rem;
+    }
+    & > li > a {
+      display: block;
+      color: $secondary;
+      border: 1px solid $secondary;
+      padding: 0.25rem 0.5rem;
+      border-radius: 5px;
+      font-size: 14px;
+      &:hover {
+        color: $info;
+        border: 1px solid $info;
+      }
+      &::before {
+        content: "#";
+        padding-right: 5px;
+      }
+    }
+  }
+}
+
+.ig-content {
+  &-tag {
+    margin-bottom: 1rem;
+    & > a {
+      color: $info;
+      margin-right: 0.25rem;
+      &:hover {
+        color: $black;
+      }
+      &::before {
+        content: "#";
+        margin-right: 1.5px;
+      }
+    }
+  }
+}
+
+.ig-text-content {
+  &:first-child::before {
+    content: "junlearning";
+    display: inline-block;
+    font-weight: 500;
+    margin-right: 12px;
+    margin-bottom: 1rem;
+  }
+
+  & > p {
+    margin-bottom: 1rem;
+  }
+}
+
+.img-fluid {
+  max-width: 100%;
+  margin-bottom: 3rem;
+}

@@ -1,0 +1,81 @@
+.btn-outline-primary {
+  background-color: #fff;
+  border-radius: 10rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  white-space: nowrap;
+  transition: all 0.15s;
+
+  &:hover,
+  :active {
+    background-color: $primary;
+    color: #fff;
+  }
+  &.active {
+    background-color: $primary;
+    color: #fff;
+  }
+}
+
+.checkbox-outline-primary {
+  background-color: #fff;
+  border: 1px solid $primary;
+  color: $secondary;
+  padding: 0.25rem 0.75rem;
+  white-space: nowrap;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  cursor: default;
+  transition: all 0.15s;
+
+  &:hover {
+    background-color: $primary;
+    color: #fff;
+  }
+
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  @include media-breakpoint-up(md) {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
+.checkbox-link-secondary {
+  color: $secondary;
+  cursor: default;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  padding: 0.5rem 0;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.checkbox-hide {
+  opacity: 0;
+  width: 0;
+  margin: 0;
+  display: none;
+}
+
+.checkbox-checked:checked + label[class*="checkbox-outline-primary"] {
+  background-color: $primary;
+  color: #fff;
+}
+
+.checkbox-checked:disabled + label[class*="checkbox-outline-primary"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.checkbox-checked:checked + label[class*="checkbox-link-secondary"] {
+  color: $primary;
+}
+
+.checkbox-checked:disabled + label[class*="checkbox-link-secondary"] {
+  opacity: 0.4;
+  pointer-events: none;
+}

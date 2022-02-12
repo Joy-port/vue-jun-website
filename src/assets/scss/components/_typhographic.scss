@@ -1,0 +1,30 @@
+.font- {
+  &Abel {
+    font-family: "Abel", sans-serif;
+  }
+  &Josefin-Sans {
+    font-family: "Josefin Sans", sans-serif;
+  }
+
+  &Nunito {
+    font-family: "Nunito", sans-serif;
+  }
+
+  &Roboto-Slab {
+    font-family: "Roboto Slab", serif;
+  }
+  &Roboto {
+    font-family: Roboto, sans-serif;
+  }
+}
+.letter-spacing-1 {
+  letter-spacing: 2px;
+}
+
+.hide-row-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
