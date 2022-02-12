@@ -8,7 +8,7 @@
           style="z-index: 1080"
         >
           <button type="button" class="btn-close invisible"></button>
-          <h5 class="modal-title">{{ product.title }}</h5>
+          <h5 class="modal-title">{{ product.title || '' }}</h5>
           <button
             type="button"
             class="btn-close"
@@ -37,11 +37,12 @@
               <span class="badge bg-warning fs-6 me-3">{{
                 product.category
               }}</span>
-              <p class="mb-0 pe-5">{{ product.description }}</p>
+              <input type="text" v-model.lazy="product.description">
+              <!-- <p class="mb-0 pe-5">{{ product.description }}</p> -->
             </li>
-            <li class="d-flex">
+            <li class="d-flex mb-3">
               <span class="material-icons-outlined me-3"> cake </span>
-              <p>{{ product.content }}</p>
+              <input type="text" v-model.lazy="product.content">
             </li>
             <li class="d-flex">
               <span class="material-icons-outlined me-3"> local_offer </span>
@@ -50,7 +51,7 @@
                 <span class="text-decoration-line-through"
                   >${{ product.origin_price }}</span
                 >
-                <span class="text-danger">${{ product.price }}</span> /
+                <input type="text" v-model.lazy="product.price"> /
                 {{ product.unit }}
               </p>
             </li>
@@ -75,9 +76,9 @@
             class="btn btn-outline-primary"
             :data-id="product.id"
           >
-            編輯
+            還原編輯
           </button>
-          <button type="button" class="btn btn-outline-danger" @click.prevent="deleteProduct(product.id)" >刪除</button>
+          <button type="button" class="btn btn-outline-danger" @click.prevent="editProduct(product)" >儲存</button>
         </div>
       </div>
     </div>
@@ -87,16 +88,27 @@
 <script>
 export default {
   name: 'Modal',
-  props: ['temp'],
+  props: ['temp', 'type'],
   emits: ['toggle-modal'],
   data () {
     return {
-      product: this.temp
+      product: null
     }
   },
   methods: {
     deleteProduct (id) {
       this.$emit('deleteProduct', id)
+    },
+    editProduct (product) {
+      this.$emit('editProduct', product)
+    }
+  },
+  created () {
+    if (this.type === 'edit') {
+      this.product = this.temp
+    } else if (this.type === 'new') {
+      this.product = {}
+      console.log(this.type, this.product)
     }
   }
 }

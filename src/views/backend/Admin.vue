@@ -5,6 +5,7 @@
       <div class='btn btn-outline-white text-white'>兩字</div>
       <h1 class="text-center py-5 mx-auto">甜點商店後台</h1>
       <button type="button" class="btn btn-outline-primary ms-auto" @click="logout">登出</button>
+      <button type="button" class="btn btn-outline-primary ms-2" @click="toggleModal('product-new')">新增產品</button>
     </header>
     <div class="container">
       <table class="table align-middle" v-if="!empty">
@@ -41,12 +42,14 @@
               <td><button type="button" class="btn btn-outline-success" @click.prevent="toggleModal('product-edit', product.id)">編輯</button></td>
               <td><button type="button" class="btn btn-outline-danger" @click.prevent="toggleModal('check-delete', product.id)" >刪除</button></td>
             </tr>
-            <ProductModal v-if="productModal" :temp='product' @toggle-modal="toggleModal" @delete-product="deleteProduct"> </ProductModal>
+            <ProductModal v-if="productModal" :temp='product' :type="modalType.category" @toggle-modal="toggleModal" @delete-product="deleteProduct" @edit-product="editProduct"> </ProductModal>
             <CheckModal v-if="checkModalStatus" :title="check.title" :msg="check.msg" :action="check.action" :id="product.id" @toggle-modal="toggleModal" @delete-product="deleteProduct(product.id)"></CheckModal>
           </template>
         </tbody>
       </table>
-      <p class="text-center" v-else> 沒有商品呦～趕快來新增吧</p>
+      <p class="text-center" v-else> 沒有商品呦～趕快來新增吧
+        <button type="button">新增商品</button>
+      </p>
     </div>
   </div>
 </template>
@@ -57,7 +60,7 @@ import CheckModal from '@/components/CheckModal.vue'
 import Alert from '@/components/Alert.vue'
 
 export default {
-  name: 'Dashboard',
+  name: 'Admin',
   components: {
     ProductModal,
     CheckModal,
@@ -92,17 +95,21 @@ export default {
     }
   },
   methods: {
-    toggleModal (type, id) {
-      this.id = id
+    toggleModal (type, id = '') {
       this.modalType.type = type.split('-')[0]
       this.modalType.category = type.split('-')[1]
+      if (!id && this.modalType.category === 'new') {
+        this.productModal = !this.productModal
+        this.addProduct()
+      }
+      this.id = id
       if (this.modalType.type === 'product') {
         this.productModal = !this.productModal
       } else if (this.modalType.type === 'check') {
         this.checkModalStatus = !this.checkModalStatus
       }
     },
-    toggleCheckModal (type) {
+    inputModalData (type) {
       if (type === 'delete') {
         this.check.title = '刪除商品'
         this.check.msg = '確認是否刪除該商品'
@@ -130,7 +137,7 @@ export default {
       this.getTokenData()
       this.axios
         .post(`${url}/api/user/check`)
-        .then((res) => {
+        .then(() => {
           this.alert.loginStatus = true
           this.alert.title = '登入成功'
           this.getProduct()
@@ -186,13 +193,33 @@ export default {
           this.loginCheck()
         })
     },
+    addProduct () {
+      console.log('success')
+    },
     deleteProduct () {
+      this.loginCheck()
       const url = this.url
       const path = this.path
       const id = this.id
       this.axios.delete(`${url}/api/${path}/admin/product/${id}`)
         .then(() => {
           this.checkModalStatus = !this.checkModalStatus
+          this.getProduct()
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    },
+    editProduct (product) {
+      const url = this.url
+      const path = this.path
+      const id = this.id
+      const editData = product
+      console.log(product, id)
+      this.axios
+        .put(`${url}/api/${path}/admin/product/${id}`, { data: editData })
+        .then(() => {
+          this.productModal = !this.productModal
           this.getProduct()
         })
         .catch((err) => {
@@ -217,7 +244,7 @@ export default {
     checkModalStatus: {
       handler: function (n, o) {
         if (n) {
-          this.toggleCheckModal(this.modalType.category, this.id)
+          this.inputModalData(this.modalType.category, this.id)
         }
       },
       deep: true
