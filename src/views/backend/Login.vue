@@ -1,45 +1,47 @@
 <template>
   <div>
-    <div
-      class="h-100 d-flex flex-column justify-content-center align-items-center"
-    >
-      <h2>登入</h2>
-      <!-- login status -->
-      <Alert :title="alertTitle" :msg="alertMsg" :status="loginStatus" :leave="alertLeave"></Alert>
-      <form
-        action="/"
-        method="post"
-        class="text-center"
-        @submit.prevent="getLoginData"
+    <div class="login vh-100" style="background-image: url('../../image/login-img.jpg');">
+      <div
+        class="login-form"
       >
-        <div class="d-flex gap-2 text-nowrap mb-3">
-          <label for="username" class="form-label">帳號</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            class="form-control"
-            v-model="user.username"
-          />
-        </div>
-        <div class="d-flex gap-2 text-nowrap mb-3">
-          <label for="password" class="form-label">密碼</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            class="form-control"
-            v-model="user.password"
-          />
-        </div>
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          @click.prevent="getLoginData"
+        <h2 class="fs-3 mb-10 text-gray-800">歡迎登入</h2>
+        <!-- login status -->
+        <Alert :title="alertTitle" :msg="alertMsg" :status="loginStatus" :leave="alertLeave"></Alert>
+        <form
+          action="/"
+          method="post"
+          class="text-center text-gray-800"
+          @submit.prevent="getLoginData"
         >
-          登入
-        </button>
-      </form>
+          <div class="d-flex align-items-center gap-2 text-nowrap mb-3">
+            <label for="username" class="">帳號</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              class="form-control"
+              v-model="user.username"
+            />
+          </div>
+          <div class="d-flex align-items-center gap-2 text-nowrap mb-3">
+            <label for="password" class="">密碼</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="form-control"
+              v-model="user.password"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            @click.prevent="getLoginData"
+          >
+            登入
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
