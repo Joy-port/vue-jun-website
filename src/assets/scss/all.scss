@@ -1,28 +1,15 @@
-@font-face {
-    font-family: "TaipeiSansTCBeta", sans-serif ;
-    src: url(../fonts/TaipeiSansTCBeta/eot/TaipeiSansTCBeta-Light.eot),
-    url(../fonts/TaipeiSansTCBeta/eot/TaipeiSansTCBeta-Regular.eot),
-    url(../fonts/TaipeiSansTCBeta/eot/TaipeiSansTCBeta-Bold.eot),
-    url(../fonts/TaipeiSansTCBeta/ttf/TaipeiSansTCBeta-Light.ttf),
-    url(../fonts/TaipeiSansTCBeta/ttf/TaipeiSansTCBeta-Regular.ttf),
-    url(../fonts/TaipeiSansTCBeta/ttf/TaipeiSansTCBeta-Bold.ttf),
-    url(../fonts/TaipeiSansTCBeta/woff/TaipeiSansTCBeta-Light.woff),
-    url(../fonts/TaipeiSansTCBeta/woff/TaipeiSansTCBeta-Regular.woff),
-    url(../fonts/TaipeiSansTCBeta/woff/TaipeiSansTCBeta-Bold.woff);
-}
-
-@import "@/node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/functions";
 @import "./helpers/variables";
-@import "@/node_modules/bootstrap/scss/utilities";
+@import "../../../node_modules/bootstrap/scss/utilities";
 @import "./helpers/bootstrapMap";
-@import "@/node_modules/bootstrap/scss/bootstrap";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
 
 @import "./helpers/base";
-@import "./components/catagories";
+@import "./components/categories";
 @import "./components/input";
 @import "./components/card";
 @import "./components/typhographic";
-@import "./components/blogContents";
+@import "./components/blogContent";
 @import "./components/img";
 @import "./components/carousel";
 @import "./components/checkBox";
