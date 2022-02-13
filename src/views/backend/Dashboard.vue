@@ -43,7 +43,7 @@
           <li class=""><a href="#" class="">新增文章</a></li>
         </ul>
       </ul>
-      <router-view class="flex-grow-1"></router-view>
+      <router-view class="flex-grow-1 py-5 px-8"></router-view>
     </div>
   </div>
 </template>
@@ -87,9 +87,7 @@ export default {
       this.axios
         .post(`${url}/api/user/check`)
         .then((res) => {
-          console.log(res.data)
           if (res.data.success) {
-            console.log(this.alert)
             this.alert.title = '登入成功'
             this.alert.loginStatus = true
             this.check = true
@@ -103,7 +101,6 @@ export default {
           }, 1000)
         })
         .catch((err) => {
-          console.error(err)
           this.alert.loginStatus = false
           this.alert.title = '登入失敗'
           if (err.response.status === 403) {
@@ -123,7 +120,6 @@ export default {
       this.axios
         .post(`${url}/logout`)
         .then((res) => {
-          console.log(res)
           this.$router.push('/login')
         })
         .catch((err) => {
