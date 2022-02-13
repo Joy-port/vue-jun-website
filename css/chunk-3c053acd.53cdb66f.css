@@ -1,0 +1,1 @@
+.alert{position:absolute;top:10px;right:-100px;transition:right .5s cubic-bezier(.61,.11,0,1.61);width:250px}.show{right:10px}.hide{right:-250px;transition:right .3s}
