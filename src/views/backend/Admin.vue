@@ -1,11 +1,5 @@
 <template>
   <div>
-    <header class="container d-flex align-items-center">
-      <div class='btn btn-outline-white text-white'>兩字</div>
-      <button type="button" class="btn btn-outline-primary ms-auto" @click="logout">登出</button>
-      <button type="button" class="btn btn-outline-primary ms-2" @click="toggleModal('product-new')">新增產品</button>
-    </header>
-    <div class="container">
       <table class="table align-middle" v-if="!empty">
         <thead>
           <tr>
@@ -46,9 +40,9 @@
         </tbody>
       </table>
       <p class="text-center" v-else> 沒有商品呦～趕快來新增吧
+        <!-- router link to new product -->
         <button type="button">新增商品</button>
       </p>
-    </div>
   </div>
 </template>
 
@@ -76,97 +70,24 @@ export default {
         msg: '',
         action: ''
       },
+      token: '',
+      url: 'https://vue3-course-api.hexschool.io/v2',
+      path: 'joy-hex',
       empty: true,
       id: ''
     }
   },
   methods: {
-    toggleModal (type, id = '') {
-      this.modalType.type = type.split('-')[0]
-      this.modalType.category = type.split('-')[1]
-      if (!id && this.modalType.category === 'new') {
-        this.productModal = !this.productModal
-        this.addProduct()
-      }
-      this.id = id
-      if (this.modalType.type === 'product') {
-        this.productModal = !this.productModal
-      } else if (this.modalType.type === 'check') {
-        this.checkModalStatus = !this.checkModalStatus
-      }
-    },
-    inputModalData (type) {
-      if (type === 'delete') {
-        this.check.title = '刪除商品'
-        this.check.msg = '確認是否刪除該商品'
-        this.check.action = '刪除'
-      }
-    },
-    alertMsgLeave (time) {
-      setTimeout(() => {
-        this.alert.leave = true
-      }, time)
-    },
-    changeEnabled (id) {
-      this.products.forEach(item => {
-        if (item.id === id) {
-          item.is_enabled = !item.is_enabled
-        }
-      })
-    },
     getTokenData () {
       const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
       this.axios.defaults.headers.common.Authorization = token
     },
-    // loginCheck () {
-    //   const url = this.url
-    //   this.getTokenData()
-    //   this.axios
-    //     .post(`${url}/api/user/check`)
-    //     .then(() => {
-    //       this.alert.loginStatus = true
-    //       this.alert.title = '登入成功'
-    //       this.getProduct()
-    //     })
-    //     .then(() => {
-    //       this.alertMsgLeave(3000)
-    //     })
-    //     .catch((err) => {
-    //       console.error(err.response)
-    //       this.alert.loginStatus = false
-    //       this.alert.title = '登入失敗'
-    //       if (err.response.status === 403) {
-    //         this.alert.msg = '登入已過時，請重新登入'
-    //       } else {
-    //         this.alert.msg = err.response.message
-    //       }
-    //       this.alertMsgLeave(500)
-    //       setTimeout(() => {
-    //         this.$router.push('/login')
-    //       }, 1000)
-    //     })
-    // },
-    // logout () {
-    //   const url = this.url
-    //   this.getTokenData()
-    //   this.axios
-    //     .post(`${url}/logout`)
-    //     .then((res) => {
-    //       this.$router.push('/login')
-    //     })
-    //     .catch((err) => {
-    //       this.alert.hide = false
-    //       this.alert.loginStatus = false
-    //       this.alert.title = '登出失敗'
-    //       this.alert.msg = err.response.data.message
-    //       this.alertMsgLeave(1000)
-    //     })
-    // },
     getProduct () {
       const url = this.url
       const path = this.path
       this.axios.get(`${url}/api/${path}/admin/products`)
         .then((res) => {
+          console.log('success', res.data)
           this.products = res.data.products
           if (this.products.length === 0) {
             this.empty = true
@@ -214,7 +135,8 @@ export default {
     }
   },
   mounted () {
-    this.loginCheck()
+    this.getTokenData()
+    this.getProduct()
   },
   watch: {
     'alert.leave': {

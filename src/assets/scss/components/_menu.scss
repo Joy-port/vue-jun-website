@@ -1,4 +1,5 @@
 .menu {
+    height: calc(100vh - 56px);
     &-list {
         background-color: $success;
         & >li > a {

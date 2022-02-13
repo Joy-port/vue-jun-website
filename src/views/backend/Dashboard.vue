@@ -19,11 +19,13 @@
         >
       </div>
     </nav>
-    <div class="d-flex vh-100">
+    <div class="d-flex menu">
       <ul class="menu-list border-top border-2 border-teal">
         <li class=""><a href="#" class="menu-link">產品</a></li>
         <ul class="menu-child-list">
-          <li class=""><router-link to="/dashboard">產品列表</router-link></li>
+          <li class="">
+            <router-link to="/dashboard" check="">產品列表</router-link>
+          </li>
           <li class=""><a href="#" class="">新增產品</a></li>
         </ul>
         <li class=""><a href="#" class="menu-link">訂單</a></li>
@@ -41,7 +43,7 @@
           <li class=""><a href="#" class="">新增文章</a></li>
         </ul>
       </ul>
-      <router-view></router-view>
+      <router-view class="flex-grow-1"></router-view>
     </div>
   </div>
 </template>
@@ -84,16 +86,24 @@ export default {
       this.getTokenData()
       this.axios
         .post(`${url}/api/user/check`)
-        .then(() => {
-          this.alert.loginStatus = true
-          this.alert.title = '登入成功'
-          this.getProduct()
+        .then((res) => {
+          console.log(res.data)
+          if (res.data.success) {
+            console.log(this.alert)
+            this.alert.title = '登入成功'
+            this.alert.loginStatus = true
+            this.check = true
+            this.alertMsgLeave(3000)
+            // this.getProduct()
+          }
         })
         .then(() => {
-          this.alertMsgLeave(3000)
+          setTimeout(() => {
+            this.alert.hide = true
+          }, 1000)
         })
         .catch((err) => {
-          console.error(err.response)
+          console.error(err)
           this.alert.loginStatus = false
           this.alert.title = '登入失敗'
           if (err.response.status === 403) {
@@ -113,6 +123,7 @@ export default {
       this.axios
         .post(`${url}/logout`)
         .then((res) => {
+          console.log(res)
           this.$router.push('/login')
         })
         .catch((err) => {
@@ -121,8 +132,12 @@ export default {
           this.alert.title = '登出失敗'
           this.alert.msg = err.response.data.message
           this.alertMsgLeave(1000)
+          this.alert.hide = true
         })
     }
+  },
+  mounted () {
+    this.loginCheck()
   }
 }
 </script>

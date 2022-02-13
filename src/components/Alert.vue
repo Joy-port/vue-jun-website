@@ -25,7 +25,7 @@ export default {
   top: 10px;
   right: -100px;
   transition: right .5s cubic-bezier(0.61, 0.11, 0, 1.61);
-  width: 250px;
+  width: 150px;
 }
 .show{
   right: 10px;
