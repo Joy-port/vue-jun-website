@@ -7,7 +7,7 @@
       <div class="login-form">
         <h2 class="fs-3 mb-10 text-gray-800">歡迎登入</h2>
         <!-- login status -->
-        <Alert :title="alertTitle" :msg="alertMsg" :status="loginStatus" :leave="alertLeave"></Alert>
+        <Alert v-if="loginStatus !== null" :title="alertTitle" :msg="alertMsg" :status="loginStatus" :leave="alertLeave"></Alert>
         <form
           action="/"
           method="post"
@@ -107,7 +107,7 @@ export default {
       const path = this.path
       document.cookie = `hexToken=${token}; expires=${new Date(expired)}`
       document.cookie = `apiPath=${path}; expires=${new Date(expired)}`
-      console.log(data.token)
+      // console.log(data.token)
     }
   }
 }
