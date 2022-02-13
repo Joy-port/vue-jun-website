@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div class="login vh-100" style="background-image: url('../../image/login-img.jpg');">
+    <div class="login vh-100" >
       <div
-        class="login-form"
+        class="login-block"
       >
+      <div class="login-form">
         <h2 class="fs-3 mb-10 text-gray-800">歡迎登入</h2>
         <!-- login status -->
         <Alert :title="alertTitle" :msg="alertMsg" :status="loginStatus" :leave="alertLeave"></Alert>
@@ -23,7 +24,7 @@
               v-model="user.username"
             />
           </div>
-          <div class="d-flex align-items-center gap-2 text-nowrap mb-3">
+          <div class="d-flex align-items-center gap-2 text-nowrap mb-10">
             <label for="password" class="">密碼</label>
             <input
               type="password"
@@ -41,6 +42,7 @@
             登入
           </button>
         </form>
+      </div>
       </div>
     </div>
   </div>
