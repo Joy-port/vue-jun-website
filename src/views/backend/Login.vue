@@ -122,7 +122,7 @@ export default {
     },
     logoutCheck () {
       const url = this.url
-      this.getLoginData()
+      this.getTokenData()
       this.axios
         .post(`${url}/api/user/check`)
         .then((res) => {
