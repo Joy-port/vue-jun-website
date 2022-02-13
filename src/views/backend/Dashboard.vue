@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <Alert v-if="!alert.hide" :title="alert.title" :msg="alert.msg" :status="alert.loginStatus" :leave="alert.leave"></Alert>
     <nav class="d-flex justify-content-between bg-success px-10 py-5">
       <div class="d-flex">
         <a href="#" class="d-flex text-white">
@@ -12,7 +13,7 @@
           <span class="material-icons me-3"> home </span>
           前往前台</a
         >
-        <a href="#" class="d-flex text-white">
+        <a href="#" class="d-flex text-white"  @click.prevent="logout">
           <span class="material-icons me-3"> logout </span>
           登出</a
         >
@@ -46,5 +47,82 @@
 </template>
 
 <script>
-export default {}
+import Alert from '@/components/Alert.vue'
+
+export default {
+  name: 'Dashboard',
+  components: {
+    Alert
+  },
+  data () {
+    return {
+      alert: {
+        loginStatus: null,
+        leave: false,
+        hide: false,
+        msg: '',
+        title: ''
+      },
+      check: false,
+      token: '',
+      url: 'https://vue3-course-api.hexschool.io/v2',
+      path: 'joy-hex'
+    }
+  },
+  methods: {
+    alertMsgLeave (time) {
+      setTimeout(() => {
+        this.alert.leave = true
+      }, time)
+    },
+    getTokenData () {
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
+      this.axios.defaults.headers.common.Authorization = token
+    },
+    loginCheck () {
+      const url = this.url
+      this.getTokenData()
+      this.axios
+        .post(`${url}/api/user/check`)
+        .then(() => {
+          this.alert.loginStatus = true
+          this.alert.title = '登入成功'
+          this.getProduct()
+        })
+        .then(() => {
+          this.alertMsgLeave(3000)
+        })
+        .catch((err) => {
+          console.error(err.response)
+          this.alert.loginStatus = false
+          this.alert.title = '登入失敗'
+          if (err.response.status === 403) {
+            this.alert.msg = '登入已過時，請重新登入'
+          } else {
+            this.alert.msg = err.response.message
+          }
+          this.alertMsgLeave(500)
+          setTimeout(() => {
+            this.$router.push('/login')
+          }, 1000)
+        })
+    },
+    logout () {
+      const url = this.url
+      this.getTokenData()
+      this.axios
+        .post(`${url}/logout`)
+        .then((res) => {
+          this.$router.push('/login')
+        })
+        .catch((err) => {
+          this.alert.hide = false
+          this.alert.loginStatus = false
+          this.alert.title = '登出失敗'
+          this.alert.msg = err.response.data.message
+          this.alertMsgLeave(1000)
+        })
+    }
+  }
+}
 </script>

@@ -1,9 +1,7 @@
 <template>
   <div>
-    <Alert v-if="!alert.hide" :title="alert.title" :msg="alert.msg" :status="alert.loginStatus" :leave="alert.leave"></Alert>
     <header class="container d-flex align-items-center">
       <div class='btn btn-outline-white text-white'>兩字</div>
-      <h1 class="text-center py-5 mx-auto">甜點商店後台</h1>
       <button type="button" class="btn btn-outline-primary ms-auto" @click="logout">登出</button>
       <button type="button" class="btn btn-outline-primary ms-2" @click="toggleModal('product-new')">新增產品</button>
     </header>
@@ -57,14 +55,12 @@
 <script>
 import ProductModal from '@/components/ProductModal.vue'
 import CheckModal from '@/components/CheckModal.vue'
-import Alert from '@/components/Alert.vue'
 
 export default {
   name: 'Admin',
   components: {
     ProductModal,
-    CheckModal,
-    Alert
+    CheckModal
   },
   data () {
     return {
@@ -80,16 +76,6 @@ export default {
         msg: '',
         action: ''
       },
-      alert: {
-        loginStatus: null,
-        leave: false,
-        hide: false,
-        msg: '',
-        title: ''
-      },
-      token: '',
-      url: 'https://vue3-course-api.hexschool.io/v2',
-      path: 'joy-hex',
       empty: true,
       id: ''
     }
@@ -132,50 +118,50 @@ export default {
       const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
       this.axios.defaults.headers.common.Authorization = token
     },
-    loginCheck () {
-      const url = this.url
-      this.getTokenData()
-      this.axios
-        .post(`${url}/api/user/check`)
-        .then(() => {
-          this.alert.loginStatus = true
-          this.alert.title = '登入成功'
-          this.getProduct()
-        })
-        .then(() => {
-          this.alertMsgLeave(3000)
-        })
-        .catch((err) => {
-          console.error(err.response)
-          this.alert.loginStatus = false
-          this.alert.title = '登入失敗'
-          if (err.response.status === 403) {
-            this.alert.msg = '登入已過時，請重新登入'
-          } else {
-            this.alert.msg = err.response.message
-          }
-          this.alertMsgLeave(500)
-          setTimeout(() => {
-            this.$router.push('/login')
-          }, 1000)
-        })
-    },
-    logout () {
-      const url = this.url
-      this.getTokenData()
-      this.axios
-        .post(`${url}/logout`)
-        .then((res) => {
-          this.$router.push('/login')
-        })
-        .catch((err) => {
-          this.alert.hide = false
-          this.alert.loginStatus = false
-          this.alert.title = '登出失敗'
-          this.alert.msg = err.response.data.message
-          this.alertMsgLeave(1000)
-        })
-    },
+    // loginCheck () {
+    //   const url = this.url
+    //   this.getTokenData()
+    //   this.axios
+    //     .post(`${url}/api/user/check`)
+    //     .then(() => {
+    //       this.alert.loginStatus = true
+    //       this.alert.title = '登入成功'
+    //       this.getProduct()
+    //     })
+    //     .then(() => {
+    //       this.alertMsgLeave(3000)
+    //     })
+    //     .catch((err) => {
+    //       console.error(err.response)
+    //       this.alert.loginStatus = false
+    //       this.alert.title = '登入失敗'
+    //       if (err.response.status === 403) {
+    //         this.alert.msg = '登入已過時，請重新登入'
+    //       } else {
+    //         this.alert.msg = err.response.message
+    //       }
+    //       this.alertMsgLeave(500)
+    //       setTimeout(() => {
+    //         this.$router.push('/login')
+    //       }, 1000)
+    //     })
+    // },
+    // logout () {
+    //   const url = this.url
+    //   this.getTokenData()
+    //   this.axios
+    //     .post(`${url}/logout`)
+    //     .then((res) => {
+    //       this.$router.push('/login')
+    //     })
+    //     .catch((err) => {
+    //       this.alert.hide = false
+    //       this.alert.loginStatus = false
+    //       this.alert.title = '登出失敗'
+    //       this.alert.msg = err.response.data.message
+    //       this.alertMsgLeave(1000)
+    //     })
+    // },
     getProduct () {
       const url = this.url
       const path = this.path
